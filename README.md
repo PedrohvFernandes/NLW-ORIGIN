@@ -21,7 +21,7 @@ Construindo uma aplicação básica de atendimento medico, com as tecnologias ba
 <img width='350' src=''/>
 
 ## Deploy
-- Deploy Web(na vercel): 
+- Deploy Web(na vercel): https://nlw-origin-lovat.vercel.app
 
 ## ✨ Stack de tecnologias:
 - HTML
