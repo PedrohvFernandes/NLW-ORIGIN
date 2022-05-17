@@ -1,0 +1,88 @@
+:root {
+  /* font-size: 100%; 100% é 16 px, se eu colocar 1 rem em algum seletor é a referencia desses 100% que é 16 px do navegador */
+  /* Pra que não tenha dificuldade de colocar os rem, basta colocar 62.5% que é 10px de 16px, entao 1 rem agora vale 10px*/
+  /* (10px*100%)/16px = 62.5%
+  10px ---- 0
+  16px ---- 100
+  */
+  font-size: 62.5%;
+
+  /* Variaveis do css*/
+
+  /* Cor, saturaçao, muita luz ou pouca luz e o alpha(opacidade)*/
+  --primary-color: hsla(170, 100%, 26%, 1);
+  --headline: hsla(210, 11%, 15%, 1);
+  --paragraph: hsla(210, 9%, 31%, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  /* sizing é o tamanho da caixa, eu quero que voce conte a partir da borda da caixa e não do conteudo da caixa*/
+  /* Ou seja, as propriedades de largura (width) e de altura (height) incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin. o tamanho da caixa + padding + a borda -> sem alterar o valor final, ou seja sempre vai ser por exemplo 375px que é o tamanho da caixa que foi passado para ela */
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans';
+  font-size: 1.6rem; /*16px*/
+  text-align: center;
+}
+
+header {
+  width: 37.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 4.1rem;
+}
+
+h4 {
+  /* font-weight: 700; não precisa, pois os h2 ja possuem o bold que é 700*/
+  /* Unidade de medida rem tras acessibilidade, pois com ela quando a pessoa precisar chegar mais perto o texto ele automaticamente vai aumentar */
+  /* Px é uma unidade fixa, rem ja é relativa. O padrao de tamanho do navegador é 16 px */
+  font-size: 1.4rem;
+  /* Cor, saturaçao, muita luz ou pouca luz e o alpha(opacidade)*/
+  color: var(--primary-color);
+  margin-bottom: 1.6rem;
+}
+
+h1 {
+  font-size: 3.4rem;
+  color: var(--headline);
+  line-height: 130%;
+  margin-bottom: 2.4rem;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 150%;
+  color: var(--paragraph);
+  margin-bottom: 3.2rem;
+}
+
+button {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 4rem;
+  margin-bottom: 6rem;
+
+  height: 6.2rem;
+  width: 26.3rem;
+
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 700;
+  /* Flex mexe com o espaçamento interno da caixa; o block mexe o espaçamento externo(ao redor) da caixa, ocupando toda a largura dela; e o inline mexe com espaçamento em linha da caixa por exemplo span.
+  caixa é tudo que possui um elemento dentro, geralmente as caixas sao display block
+  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Gap espaço entre os elementos */
+  gap: 1.6rem;
+  cursor: pointer;
+  /* Propriedades dos conceitos de caixa -> margin espaçamento externo da caixa, padding espaçamento interno da caixa, border da caixa, width largura e height altura */
+  margin: 0 auto;
+}
