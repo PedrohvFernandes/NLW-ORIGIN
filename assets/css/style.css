@@ -14,8 +14,11 @@
   --primary-color: hsla(170, 100%, 26%, 1);
   --headline: hsla(210, 11%, 15%, 1);
   --paragraph: hsla(210, 9%, 31%, 1);
+  
   --brand-beige: hsla(39, 100%, 97%, 1);
   --brand-light: hsla(148, 23%, 89%, 1);
+
+  --bg-light: hsla(180, 14%, 97%, 1);
 
   --nav-height: 7.2rem;
 }
@@ -26,6 +29,11 @@
   /* sizing é o tamanho da caixa, eu quero que voce conte a partir da borda da caixa e não do conteudo da caixa*/
   /* Ou seja, as propriedades de largura (width) e de altura (height) incluem o tamanho padding size e a propriedade border, mas não incluem a propriedade margin. o tamanho da caixa + padding + a borda -> sem alterar o valor final, ou seja sempre vai ser por exemplo 375px que é o tamanho da caixa que foi passado para ela */
   box-sizing: border-box;
+}
+
+html{
+  /* chrome://flags/#smooth-scrolling  -> enabled */
+  scroll-behavior: smooth;
 }
 
 /* o % é flexivel. Com isso, o % sempre vai ser referente a onde ele esta posicionado, o body ta dentro do HTML e o HTML é o root do documento, entao ambos vao sempre pegar altura e largura de 100%*/
@@ -42,6 +50,8 @@ body {
 
   /* Não conta a largura da barra */
   overflow: overlay;
+
+  background-color: var(--bg-light);
 }
 
 /* Embrulhando */
@@ -58,155 +68,81 @@ ul {
   list-style: none;
 }
 
+/* Padrao da imagem, a onde ela respeita 100% do tamanho da largura que ele esta contendo*/
+img {
+  max-width: 100%;
+}
+
 a {
   text-decoration: none;
   color: inherit;
 }
 
-/* ============ HEADER =========== */
-
-/* Criando uma tag, usando uma pseudo class, a before é antes do conteudo do header */
-
-header {
-  /* calculo de 4.1rem + 7.2rem */
-  margin-top: calc(4.1rem + var(--nav-height));
+/* 100px de espaço de todas as sections */
+section {
+  padding-block: 10rem;
 }
 
-/* fundo verde*/
-header::before {
-  /* Conteudo dela é vazio */
-  content: '';
-  /* width: 100vw; tiramos o 100view port width porque quando da 100view port ele soma mais a barrinha do eixo y e ao somar, ele cria uma barrinha em baixo de rolagem no eixo X */
-  width: 100%;
-  height: calc(108rem + var(--nav-height)); /*1080px + 7.2rem da altura da nav*/
-  background-color: var(--brand-light);
-  display: block;
-
-  /* Agora o conteudo esta por cima de tudo, ou seja ele agora é do navegador*/
-  /* Quando o elemento pai dele é relative isso faz com que ele seja relativo ao tamanho da caixa do pai dele, ou seja ele se movimenta de acordo com a caixa não ao tamanho da view-port do navegador igual o absolute, mas ja que o pai dele que é o header não é relative, então se movimenta de acordo com a view port do documento */
-  position: absolute;
-  /* Destravando top, right, bottom e left */
-  top: 0;
-  left: 0;
-  /* Eixo z */
-  z-index: -1;
-}
-
-header h4 {
+/* Padrões */
+section header h4{
   /* font-weight: 700; não precisa, pois os h2 ja possuem o bold que é 700*/
   /* Unidade de medida rem tras acessibilidade, pois com ela quando a pessoa precisar chegar mais perto o texto ele automaticamente vai aumentar */
   /* Px é uma unidade fixa, rem ja é relativa. O padrao de tamanho do navegador é 16 px */
   font-size: 1.4rem;
+  line-height: 150%;
+  letter-spacing: 0.08rem;
   /* Cor, saturaçao, muita luz ou pouca luz e o alpha(opacidade)*/
   color: var(--primary-color);
+
+  text-transform: uppercase;
+
   margin-bottom: 1.6rem;
 }
 
-header h1 {
+section header h2 {
+  font-size: 3rem;
+  line-height: 3.9rem;
+  
+  color: var(--headline);
+}
+
+section header h1{
   font-size: 3.4rem;
   color: var(--headline);
   line-height: 130%;
   margin-bottom: 2.4rem;
 }
 
-header p {
+section .content p {
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 150%;
   color: var(--paragraph);
-  margin-bottom: 3.2rem;
-}
-
-header button {
-  background: var(--primary-color);
-  border: none;
-  border-radius: 4rem;
-  margin-bottom: 6rem;
-
-  height: 6.2rem;
-  width: 26.3rem;
-
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1.4rem;
-  font-weight: 700;
-  /* Flex mexe com o espaçamento interno da caixa, colocando uma do lado da outra, mas que é possivel manipular o alinhamento dos elementos dentro da caixa; o block mexe o espaçamento externo(ao redor) da caixa, ocupando toda a largura dela; e o inline mexe com espaçamento em linha da caixa por exemplo span.
-  caixa é tudo que possui um elemento dentro, geralmente as caixas sao display block
-  */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Gap espaço/separaçao entre os elementos */
-  gap: 1.6rem;
-  cursor: pointer;
-  /* Propriedades dos conceitos de caixa -> margin espaçamento externo da caixa, padding espaçamento interno da caixa, border da caixa, width largura e height altura */
-  margin: 0 auto;
-}
-
-header img {
-  /* Precisei mexer na largura, para que no object-position da imagem acompanha-se o tamanho da fonte, ou seja em vez de px, usar o rem no object-position */
-  width: 26.4rem;
-  /* Tira o posicionamento em linha */
-  display: block;
-  /* Centraliza ela de novo */
-  margin-inline: auto;
-  /* Pegamos o objeto dentro do img que é a imagem em si, o img em si é uma caixa que tem um objeto dentro */
-  /* Se eu não mexe-se a imagem, na largura dela, eu deixaria isso como px, em vez de rem */
-  object-position: 0 2rem;
-}
-
-.stats {
-  width: 32.7rem;
-  /* padding: 4rem 0; */
-  /* Mexe em cima e em baixo */
-  padding-block: 4rem;
-  /* Eixo x -> left e right */
-  margin-inline: auto;
-
-  background-color: var(--brand-beige);
-  border: 0.1rem solid var(--brand-light);
-  border-radius: 0.6rem;
-
-  /* Eixo principal row é na horizontal e o eixo secundario fica na vertical*/
-  display: flex;
-  /* Ja na direção column ele fica como eixo principal na vertical e o eixo secundario na horizontal */
-  flex-direction: column;
-  /* Ele alinha em columns o eixo principal(vertical), em row no eixo secundario(vertical) */
-  justify-content: center;
-  /* Ele alinha em columns o eixo secundario(horizontal), em row no eixo principal(horizontal) */
-  /* align-items: center; */
-  gap: 6rem;
-}
-
-.stat h3 {
-  font-size: 4.8rem;
-  color: var(--headline);
-  line-height: 130%;
-
-  margin-bottom: 0.4rem;
-}
-
-.stat p {
-  margin: 0;
-  color: var(--primary-color);
-  /* font-size: 1.6rem; nao precisa colocar, porque no body ja esta 1.6rem que é 16px*/
-  line-height: 150%;
 }
 
 /* ============ NAVIGATION =========== */
 nav {
   display: flex;
 
-  /* padding-inline: 2.4rem;
-  padding-block: 1.6rem; */
+  /* padding-inline: 2.4rem; esquerda direita
+  padding-block: 1.6rem; cima baixo*/
   /* padding: 1.6rem 2.4rem; */
   height: var(--nav-height);
 
   position: fixed;
-  top: 0;
+  /* 
+  Aqui centraliza o menu
+  Mas estava bugando  na parte de serviços quando clicava pra abrir e fechar o menu, ele sumia
   left: 50%;
-  /* Deslocando do eixo X */
-  transform: translateX(-50%);
+  Deslocando do eixo X
+  transform: translateX(-50%); 
+  */
+  top: 0;
+  /* Com isso, basta deixar esse menu 100vw aqui, em vez de deixar so quando estiver scrollado a pagina, porque a nav agora é uma caixa principal, que dentro dela tem um wrapper, que recebe um limite largura e margin para centralizar de forma automatica */
+  width: 100vw;
+
+  /* Z-index aqui porque o home esta sobrepondo ele com a lib de scroll*/
+  z-index: 100;
 }
 
 nav .wrapper {
@@ -218,7 +154,7 @@ nav .wrapper {
 
 nav.scroll {
   background: var(--primary-color);
-  width: 100vw;
+  /* width: 100vw; agora toda a nav é 100vw */
 }
 
 nav.scroll svg:nth-child(1) path {
@@ -241,13 +177,16 @@ body.menu-expanded {
   overflow: hidden;
 }
 
-/* Estou pegando todos > os filhos do primeiro nivel * */
+/*     Estou pegando todos > os filhos do primeiro nivel *      */
 /* body.menu-expanded > * {
   display: none;
 } */
 /* Mas temos a pseudo class :not, eu falo pra ele quem não vai aplicar pra quem eu falar aqui, exceto o nav, todos sumiram, so o nav que não. Com isso, se eu navegar com o tab, eu so vou navegar com as opçoes dentro do menu. Ou seja, todos de primeiro nivel vao sumir exceto a nav*/
 body.menu-expanded > :not(nav) {
-  display: none;
+  /* Tivemos que tirar o display none, pelo fato que ele apagava tudo, que não fosse nav, com isso ao clicar pra aparecer o menu ele apagava e ao fechar ele voltava tudo e fazia com que voltasse ao inicio e a onde eu mandei ir, por exemplo em serviços ele ia, mas quando clicava no menu de novo, ele voltava para o inicio*/
+  /* display: none; */
+  /* Com isso passamos para que a visibilidade dele esta escondido */
+  visibility: hidden;
 }
 
 .menu,
@@ -263,9 +202,9 @@ body.menu-expanded .close-menu {
   visibility: visible;
 }
 
-body.menu-expanded nav {
-  /* Tira a posição fixed que vem do nav quando não esta expanded */
-  position: relative;
+/* Antes do expanded ele joga o menu pra baixo */
+.menu{
+  transform: translateY(100%);
 }
 
 body.menu-expanded .menu {
@@ -278,6 +217,11 @@ body.menu-expanded .menu {
   height: 100vh;
 
   padding-top: var(--nav-height);
+
+  /* Quando o body tiver o expanded o menu volta, com uma transição de 3 segundos */
+  transition: transform 300ms;
+  transform: translateY(0);
+
 }
 
 .menu ul:nth-child(1) {
@@ -303,7 +247,7 @@ body.menu-expanded .menu {
   text-transform: uppercase;
 
   color: var(--primary-color);
-  /* Em linha e com o block ele ja aplica o margin, altura, altura, a quebra de linha e ja tira a sobreposiçao dos elementos */
+  /* Em linha e com o block ele ja aplica o margin, altura, largura, a quebra de linha e ja tira a sobreposiçao dos elementos */
   display: inline-block;
   padding: 1.6rem 3.2rem;
 
@@ -331,4 +275,154 @@ body.menu-expanded .logo path {
 
 body.menu-expanded button path {
   stroke: white;
+}
+
+/* ============ HEADER =========== */
+#home {
+  /* calculo de 4.1rem + 7.2rem */
+  padding-top: calc(4.1rem + var(--nav-height));
+}
+
+/* Criando uma tag, usando uma pseudo class, a before é antes do conteudo do header */
+/* fundo verde*/
+#home::before {
+  /* Conteudo dela é vazio */
+  content: '';
+  /* width: 100vw; tiramos o 100view port width porque quando da 100view port ele soma mais a barrinha do eixo y e ao somar, ele cria uma barrinha em baixo de rolagem no eixo X */
+  width: 100%;
+  height: calc(108rem + var(--nav-height)); /*1080px + 7.2rem da altura da nav*/
+  background-color: var(--brand-light);
+  display: block;
+
+  /* Agora o conteudo esta por cima de tudo, ou seja ele agora é do navegador*/
+  /* Quando o elemento pai dele é relative isso faz com que ele seja relativo ao tamanho da caixa do pai dele, ou seja ele se movimenta de acordo com a caixa não ao tamanho da view-port do navegador igual o absolute, mas ja que o pai dele que é o header não é relative, então se movimenta de acordo com a view port do documento */
+  position: absolute;
+  /* Destravando top, right, bottom e left */
+  top: 0;
+  left: 0;
+  /* Eixo z */
+  z-index: -1;
+}
+
+#home p {
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 150%;
+  color: var(--paragraph);
+  margin-bottom: 3.2rem;
+}
+
+#home button {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 4rem;
+  margin-bottom: 6rem;
+
+  height: 6.2rem;
+  width: 26.3rem;
+
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 700;
+  /* Flex mexe com o espaçamento interno da caixa, colocando uma do lado da outra, mas que é possivel manipular o alinhamento dos elementos dentro da caixa; o block mexe o espaçamento externo(ao redor) da caixa, ocupando toda a largura dela; e o inline mexe com espaçamento em linha da caixa por exemplo span.
+  caixa é tudo que possui um elemento dentro, geralmente as caixas sao display block
+  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Gap espaço/separaçao entre os elementos */
+  gap: 1.6rem;
+  cursor: pointer;
+  /* Propriedades dos conceitos de caixa -> margin espaçamento externo da caixa, padding espaçamento interno da caixa, border da caixa, width largura e height altura */
+  margin: 0 auto;
+}
+
+#home img {
+  /* Precisei mexer na largura, para que no object-position da imagem acompanha-se o tamanho da fonte, ou seja em vez de px, usar o rem no object-position */
+  width: 26.4rem;
+  /* Tira o posicionamento em linha */
+  display: block;
+  /* Centraliza ela de novo */
+  margin-inline: auto;
+  /* Pegamos o objeto dentro do img que é a imagem em si, o img em si é uma caixa que tem um objeto dentro */
+  /* Se eu não mexe-se a imagem, na largura dela, eu deixaria isso como px, em vez de rem */
+  object-position: 0 2rem;
+}
+
+#home .stats {
+  width: 32.7rem;
+  /* padding: 4rem 0; */
+  /* Mexe em cima e em baixo */
+  padding-block: 4rem;
+  /* Eixo x -> left e right */
+  margin-inline: auto;
+
+  background-color: var(--brand-beige);
+  border: 0.1rem solid var(--brand-light);
+  border-radius: 0.6rem;
+
+  /* Eixo principal row é na horizontal e o eixo secundario fica na vertical*/
+  display: flex;
+  /* Ja na direção column ele fica como eixo principal na vertical e o eixo secundario na horizontal */
+  flex-direction: column;
+  /* Ele alinha em columns o eixo principal(vertical), em row no eixo secundario(vertical) */
+  justify-content: center;
+  /* Ele alinha em columns o eixo secundario(horizontal), em row no eixo principal(horizontal) */
+  /* align-items: center; */
+  gap: 6rem;
+}
+
+#home .stat h3 {
+  font-size: 4.8rem;
+  color: var(--headline);
+  line-height: 130%;
+
+  margin-bottom: 0.4rem;
+}
+
+#home .stat p {
+  margin: 0;
+  color: var(--primary-color);
+  /* font-size: 1.6rem; nao precisa colocar, porque no body ja esta 1.6rem que é 16px*/
+  line-height: 150%;
+}
+
+/* ============ SERVIÇOS =========== */
+
+#services header h2 {
+  margin-bottom: 6rem;
+}
+
+#services .cards{
+  display: flex;
+  flex-direction: column;
+  /* O gap so funciona com o display flex */
+  gap: 3.2rem;
+}
+
+#services .card {
+  padding: 2.4rem;
+  text-align: left;
+  background: white;
+  border: 0.1rem solid var(--brand-light);
+  border-radius: 0.6rem;
+}
+
+#services .card h3 {
+  margin-block: 1.6rem;
+}
+
+/* ============ ABOUT =========== */
+#about {
+  text-align: left;
+  background-color: var(--brand-beige);
+}
+
+#about header h2 {
+  margin-bottom: 2.4rem;
+}
+
+#about .content p {
+  margin: 2.4rem 0 6rem 0;
 }
