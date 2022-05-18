@@ -157,7 +157,7 @@ nav.scroll {
   /* width: 100vw; agora toda a nav é 100vw */
 }
 
-nav.scroll svg:nth-child(1) path {
+nav.scroll .logo path {
   fill: white;
 }
 
