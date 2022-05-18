@@ -72,6 +72,7 @@ header {
   margin-top: calc(4.1rem + var(--nav-height));
 }
 
+/* fundo verde*/
 header::before {
   /* Conteudo dela é vazio */
   content: '';
@@ -218,8 +219,6 @@ nav .wrapper {
 nav.scroll {
   background: var(--primary-color);
   width: 100vw;
-  position: fixed;
-  top: 0;
 }
 
 nav.scroll svg:nth-child(1) path {
@@ -264,6 +263,11 @@ body.menu-expanded .close-menu {
   visibility: visible;
 }
 
+body.menu-expanded nav {
+  /* Tira a posição fixed que vem do nav quando não esta expanded */
+  position: relative;
+}
+
 body.menu-expanded .menu {
   position: fixed;
   top: 0;
@@ -274,11 +278,6 @@ body.menu-expanded .menu {
   height: 100vh;
 
   padding-top: var(--nav-height);
-}
-
-body.menu-expanded nav {
-  /* Tira a posição absoluta que vem do .menu */
-  position: relative;
 }
 
 .menu ul:nth-child(1) {
@@ -319,6 +318,7 @@ body.menu-expanded nav {
   gap: 3.2rem;
 }
 
+/* o z index fica 100 camadas superior que o .menu */
 body.menu-expanded .logo,
 body.menu-expanded nav button {
   position: relative;
