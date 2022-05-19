@@ -30,6 +30,7 @@ Construindo uma aplicação básica de atendimento medico, com as tecnologias ba
 - HTML
 - CSS
 - JS
+- scrollreveal
 
 ## 👨‍💻 Autor:
 - Linkedin: https://www.linkedin.com/in/pedro-henrique-vieira-fernandes
