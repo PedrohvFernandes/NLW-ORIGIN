@@ -8,15 +8,20 @@
   */
   font-size: 62.5%;
 
-  /* Variaveis do css*/
+  /* Variaveis do css, sempre colocar nomes genericos, não muito especificos, por exemplo não colocar --brand-light-green, somente --brand-light pois assim no futuro eu consigo alterar a cor, sem precisar ficar alterando o nome*/
+
+  /* Variavel geral */
+  --hue: 1;
 
   /* Cor, saturaçao, muita luz ou pouca luz e o alpha(opacidade)*/
-  --primary-color: hsla(170, 100%, 26%, 1);
+  --primary-color: hsla(var(--hue), 100%, 26%, 1);
   --headline: hsla(210, 11%, 15%, 1);
   --paragraph: hsla(210, 9%, 31%, 1);
-  
+
   --brand-beige: hsla(39, 100%, 97%, 1);
-  --brand-light: hsla(148, 23%, 89%, 1);
+  /* 170(hue) - 148(--brando-light) = 22       170 - 22 = 148 */
+  --brand-light: hsla(calc(var(--hue) - 22), 23%, 89%, 1);
+  --brand-dark: hsla(var(--hue), 100%, 14%, 1);
 
   --bg-light: hsla(180, 14%, 97%, 1);
 
@@ -31,7 +36,7 @@
   box-sizing: border-box;
 }
 
-html{
+html {
   /* chrome://flags/#smooth-scrolling  -> enabled */
   scroll-behavior: smooth;
 }
@@ -84,7 +89,7 @@ section {
 }
 
 /* Padrões */
-section header h4{
+section header h4 {
   /* font-weight: 700; não precisa, pois os h2 ja possuem o bold que é 700*/
   /* Unidade de medida rem tras acessibilidade, pois com ela quando a pessoa precisar chegar mais perto o texto ele automaticamente vai aumentar */
   /* Px é uma unidade fixa, rem ja é relativa. O padrao de tamanho do navegador é 16 px */
@@ -102,11 +107,11 @@ section header h4{
 section header h2 {
   font-size: 3rem;
   line-height: 3.9rem;
-  
+
   color: var(--headline);
 }
 
-section header h1{
+section header h1 {
   font-size: 3.4rem;
   color: var(--headline);
   line-height: 130%;
@@ -118,6 +123,75 @@ section .content p {
   font-size: 1.6rem;
   line-height: 150%;
   color: var(--paragraph);
+}
+
+.button {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 4rem;
+
+  margin-bottom: 6rem;
+
+  /* height: 6.2rem;
+  width: 26.3rem; */
+  /* Colocando espaçamento para ter uma respiraçao nas bordas, pois a gente tirou os tamanhos fixos */
+  padding: 1.6rem 3.2rem;
+  /* Esse width se adapta ao conteudo, o conteudo dele é o padding, o icone e o nome do button, dessa forma a gente remove a largura e altura fixa. */
+  width: fit-content;
+
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 700;
+  /* Flex mexe com o espaçamento interno da caixa, colocando uma do lado da outra, mas que é possivel manipular o alinhamento dos elementos dentro da caixa; o block mexe o espaçamento externo(ao redor) da caixa, ocupando toda a largura dela; e o inline mexe com espaçamento em linha da caixa por exemplo span.
+  caixa é tudo que possui um elemento dentro, geralmente as caixas sao display block
+  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Gap espaço/separaçao entre os elementos */
+  gap: 1.6rem;
+  cursor: pointer;
+
+  /* text-decoration: none; */
+
+  transition: background .2s;
+}
+
+.button:hover{
+  background: var(--brand-dark);
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+}
+
+/* Custom colors */
+#services .card circle {
+  fill: var(--brand-light);
+}
+
+/* vai no nav e procure o path que contem esse fill com esse valor ai */
+#navigation .logo path[fill*="#00856F"],
+#backToTopButton circle {
+  fill: var(--primary-color);
+}
+
+body.menu-expanded #navigation .logo path,
+#navigation.scroll .logo path{
+  fill: white;
+}
+
+button.open-menu path[stroke*='00856F'],
+#contact li path {
+  stroke: var(--primary-color);
+}
+
+#navigation.scroll button.open-menu path[stroke*='00856F']{
+  stroke: white;
 }
 
 /* ============ NAVIGATION =========== */
@@ -155,14 +229,6 @@ nav .wrapper {
 nav.scroll {
   background: var(--primary-color);
   /* width: 100vw; agora toda a nav é 100vw */
-}
-
-nav.scroll .logo path {
-  fill: white;
-}
-
-nav.scroll button path {
-  stroke: white;
 }
 
 nav button {
@@ -203,7 +269,7 @@ body.menu-expanded .close-menu {
 }
 
 /* Antes do expanded ele joga o menu pra baixo */
-.menu{
+.menu {
   transform: translateY(100%);
 }
 
@@ -221,7 +287,6 @@ body.menu-expanded .menu {
   /* Quando o body tiver o expanded o menu volta, com uma transição de 3 segundos */
   transition: transform 300ms;
   transform: translateY(0);
-
 }
 
 .menu ul:nth-child(1) {
@@ -255,11 +320,12 @@ body.menu-expanded .menu {
   margin-bottom: 8rem;
 }
 
-.social-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3.2rem;
+.menu .button:hover {
+  background-color: var(--primary-color);
+  color: white;
+
+  /* Aumenta o brilho do background */
+  filter: brightness(1.2);
 }
 
 /* o z index fica 100 camadas superior que o .menu */
@@ -304,38 +370,18 @@ body.menu-expanded button path {
   z-index: -1;
 }
 
+#home .button {
+  /* Propriedades dos conceitos de caixa -> margin espaçamento externo da caixa, padding espaçamento interno da caixa, border da caixa, width largura e height altura */
+  /* margin: 0 auto; */
+  margin-inline: auto;
+}
+
 #home p {
   font-weight: 400;
   font-size: 1.8rem;
   line-height: 150%;
   color: var(--paragraph);
   margin-bottom: 3.2rem;
-}
-
-#home button {
-  background: var(--primary-color);
-  border: none;
-  border-radius: 4rem;
-  margin-bottom: 6rem;
-
-  height: 6.2rem;
-  width: 26.3rem;
-
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1.4rem;
-  font-weight: 700;
-  /* Flex mexe com o espaçamento interno da caixa, colocando uma do lado da outra, mas que é possivel manipular o alinhamento dos elementos dentro da caixa; o block mexe o espaçamento externo(ao redor) da caixa, ocupando toda a largura dela; e o inline mexe com espaçamento em linha da caixa por exemplo span.
-  caixa é tudo que possui um elemento dentro, geralmente as caixas sao display block
-  */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Gap espaço/separaçao entre os elementos */
-  gap: 1.6rem;
-  cursor: pointer;
-  /* Propriedades dos conceitos de caixa -> margin espaçamento externo da caixa, padding espaçamento interno da caixa, border da caixa, width largura e height altura */
-  margin: 0 auto;
 }
 
 #home img {
@@ -394,7 +440,7 @@ body.menu-expanded button path {
   margin-bottom: 6rem;
 }
 
-#services .cards{
+#services .cards {
   display: flex;
   flex-direction: column;
   /* O gap so funciona com o display flex */
@@ -425,4 +471,79 @@ body.menu-expanded button path {
 
 #about .content p {
   margin: 2.4rem 0 6rem 0;
+}
+
+/* ============ CONTACT =========== */
+#contact {
+  text-align: left;
+}
+
+#contact header {
+  margin-bottom: 3.2rem;
+}
+
+#contact ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  margin-bottom: 3.2rem;
+}
+
+#contact ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+/* ============ footer  =========== */
+footer {
+  background-color: var(--primary-color);
+  padding-block: 6rem;
+  text-align: left;
+
+  color: white;
+}
+footer .logo{
+  /* Passa pra inline-block, para aceitar as propiedades em linha. Ou seja mantenha em linha, mas que aceite as propiedades que so funcionam no block, por exemplo o margin-bottom */
+  display: inline-block;
+  margin-bottom: 2.4rem;
+}
+
+footer .log svg {
+  width: 23.6rem;
+  height: 3.1rem;
+}
+
+footer .logo path {
+  fill: white;
+}
+
+footer p{
+  color: var(--brand-beige);
+  line-height: 2;
+
+  margin-bottom: 3.2rem;
+}
+
+footer .social-links {
+  justify-content: flex-start;
+}
+
+/* BACK TO TOP */
+#backToTopButton {
+  position: fixed;
+  bottom: 1rem;
+  right: 2.5rem;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(100%);
+  transition: 200ms;
+}
+
+#backToTopButton.show{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
