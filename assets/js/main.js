@@ -61,7 +61,9 @@ ScrollReveal({
   duration: 700,
   reset: true
 }).reveal(`
-  #home, 
+  #home,
+  #home header,
+  #home .content,
   #home img, 
   #home .stats, 
   #services,

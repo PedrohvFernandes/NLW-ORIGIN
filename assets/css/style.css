@@ -11,7 +11,7 @@
   /* Variaveis do css, sempre colocar nomes genericos, não muito especificos, por exemplo não colocar --brand-light-green, somente --brand-light pois assim no futuro eu consigo alterar a cor, sem precisar ficar alterando o nome*/
 
   /* Variavel geral */
-  --hue: 1;
+  --hue: 170;
 
   /* Cor, saturaçao, muita luz ou pouca luz e o alpha(opacidade)*/
   --primary-color: hsla(var(--hue), 100%, 26%, 1);
@@ -21,6 +21,8 @@
   --brand-beige: hsla(39, 100%, 97%, 1);
   /* 170(hue) - 148(--brando-light) = 22       170 - 22 = 148 */
   --brand-light: hsla(calc(var(--hue) - 22), 23%, 89%, 1);
+  /* 170(hue) - 180(--brando-light) = -10       170 + 10 = 180 */
+  --brand-light-2: hsl(calc(var(--hue) + 10), 14%, 97%);
   --brand-dark: hsla(var(--hue), 100%, 14%, 1);
 
   --bg-light: hsla(180, 14%, 97%, 1);
@@ -62,7 +64,10 @@ body {
 /* Embrulhando */
 /* Classe para geral */
 .wrapper {
-  width: 37.5rem;
+  /* width: 37.5rem; */
+  /* Tirando a largura fixa, e passando uma propriedade, a onde ela verifica o valor menor entre eles, o menor valor entre eles é de 50rem. O min procura o menor valor, se 100% da caixa for o menor valor aceita 100%, se 50 for menor fica no 50. Ou seja o tamanho maximo da minha caixa é de 50 rem, se ficar menor que 50 rem a minha caixa tem uma largura de 100% e 100% é flexivel, se for maior ela fica com 50 rem que é uma largura fixa */
+  width: min(50rem, 100%);
+
   /* margin-right: auto;
   margin-left: auto; */
   margin-inline: auto;
@@ -155,10 +160,10 @@ section .content p {
 
   /* text-decoration: none; */
 
-  transition: background .2s;
+  transition: background 0.2s;
 }
 
-.button:hover{
+.button:hover {
   background: var(--brand-dark);
 }
 
@@ -175,13 +180,13 @@ section .content p {
 }
 
 /* vai no nav e procure o path que contem esse fill com esse valor ai */
-#navigation .logo path[fill*="#00856F"],
+#navigation .logo path[fill*='#00856F'],
 #backToTopButton circle {
   fill: var(--primary-color);
 }
 
 body.menu-expanded #navigation .logo path,
-#navigation.scroll .logo path{
+#navigation.scroll .logo path {
   fill: white;
 }
 
@@ -190,7 +195,7 @@ button.open-menu path[stroke*='00856F'],
   stroke: var(--primary-color);
 }
 
-#navigation.scroll button.open-menu path[stroke*='00856F']{
+#navigation.scroll button.open-menu path[stroke*='00856F'] {
   stroke: white;
 }
 
@@ -237,7 +242,14 @@ nav button {
   cursor: pointer;
 }
 
+/* Deixamos o menu e o close menu fixo porque eles estavam ocupando espaço no nav e jogando o botao de abrir o menu para fora*/
+nav .close-menu,
+nav .menu {
+  position: fixed;
+}
+
 /* ============ MENU-EXPANDED =========== */
+
 /* Quando o body tiver a classe .menu-expanded ele vai procurar o .menu */
 body.menu-expanded {
   overflow: hidden;
@@ -274,7 +286,6 @@ body.menu-expanded .close-menu {
 }
 
 body.menu-expanded .menu {
-  position: fixed;
   top: 0;
   left: 0;
   background: var(--primary-color);
@@ -345,6 +356,7 @@ body.menu-expanded button path {
 
 /* ============ HEADER =========== */
 #home {
+  padding-block: 0;
   /* calculo de 4.1rem + 7.2rem */
   padding-top: calc(4.1rem + var(--nav-height));
 }
@@ -356,17 +368,17 @@ body.menu-expanded button path {
   content: '';
   /* width: 100vw; tiramos o 100view port width porque quando da 100view port ele soma mais a barrinha do eixo y e ao somar, ele cria uma barrinha em baixo de rolagem no eixo X */
   width: 100%;
-  height: calc(108rem + var(--nav-height)); /*1080px + 7.2rem da altura da nav*/
+  height: calc(76% + var(--nav-height)); /*1080px + 7.2rem da altura da nav*/
   background-color: var(--brand-light);
   display: block;
 
   /* Agora o conteudo esta por cima de tudo, ou seja ele agora é do navegador*/
-  /* Quando o elemento pai dele é relative isso faz com que ele seja relativo ao tamanho da caixa do pai dele, ou seja ele se movimenta de acordo com a caixa não ao tamanho da view-port do navegador igual o absolute, mas ja que o pai dele que é o header não é relative, então se movimenta de acordo com a view port do documento */
+  /* Quando o elemento pai dele é relative isso faz com que ele seja relativo ao tamanho da caixa do pai dele, ou seja ele se movimenta de acordo com a caixa que ele esta não ao tamanho da view-port do navegador igual no estado padrao do absolute, mas ja que o pai dele que é o header não é relative, então se movimenta de acordo com a view port do documento, ou seja no estado padrao do absolute*/
   position: absolute;
   /* Destravando top, right, bottom e left */
   top: 0;
   left: 0;
-  /* Eixo z */
+  /* Eixo z, faz ele ficar para baixo de tudo */
   z-index: -1;
 }
 
@@ -397,7 +409,9 @@ body.menu-expanded button path {
 }
 
 #home .stats {
-  width: 32.7rem;
+  /* width: 32.7rem; */
+  /* deixando flexivel, pegando 100% da caixa que voce esta. Fizemos isso pois ela estava transbordando*/
+  width: 100%;
   /* padding: 4rem 0; */
   /* Mexe em cima e em baixo */
   padding-block: 4rem;
@@ -503,7 +517,7 @@ footer {
 
   color: white;
 }
-footer .logo{
+footer .logo {
   /* Passa pra inline-block, para aceitar as propiedades em linha. Ou seja mantenha em linha, mas que aceite as propiedades que so funcionam no block, por exemplo o margin-bottom */
   display: inline-block;
   margin-bottom: 2.4rem;
@@ -518,7 +532,7 @@ footer .logo path {
   fill: white;
 }
 
-footer p{
+footer p {
   color: var(--brand-beige);
   line-height: 2;
 
@@ -542,8 +556,231 @@ footer .social-links {
   transition: 200ms;
 }
 
-#backToTopButton.show{
+#backToTopButton.show {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/* ==================  RESPONSIVO: DESKTOP =================== */
+
+/* Quando o dispositivo tiver uma largura minima de 1024px. Ou seja quando eu tiver 1024px pra cima voce vai aplica tudo. se fosse max-width:1024px ele aplicaria tudo quando estiver pra baixo do 1024*/
+@media (min-width: 1024px) {
+  /* ==================  GERAL =================== */
+  body{
+    /* Ativamos auto aqui, porque tinhamos colocado o overflow: overlay; que Não conta a largura da barra. Agora conta*/
+    overflow: auto;
+  }
+
+  .wrapper {
+    /* Ou voce pega 112rem ou 100%. Ate os 112(1120px) rem ele vai crescer, mais do que isso ele não cresce mais. Ou seja abaixo disso ele fica 100% que é flexivel */
+    width: min(112rem, 100%);
+    /* O grid trabalha com as caixas dentro  da caixa que ele estiver. Quando é display block, ele trabalha com as caixas ao redor e com isso tem quebra de linha nas caixas ao redor, tendo uma largura total. O display inline ele mantem o tamanho sem quebra de linha mantendo os elementos um do lado do outro. O display flex mexe com as caixas dentro de um caixa, mudando a direçao, o grid trabalha com essas caixas da mesma forma, so que não coloca uma do lado da outra*/
+    display: grid;
+  }
+
+  section {
+    padding-block: 16rem;
+  }
+  /* ==================  NAVIGATION =================== */
+
+  /* reset */
+  /* Procure no nav .wrapper todos os elementos *   e reinicio tudo */
+  nav#navigation .wrapper * {
+    margin: 0;
+    padding: 0;
+    /* Valor inicial antes de eu ter colocado css */
+    visibility: initial;
+    display: initial;
+    opacity: initial;
+    flex-direction: initial;
+    position: initial;
+    font-size: initial;
+    transform: initial;
+    color: initial;
+    background-color: initial;
+    font-weight: initial;
+    filter: initial;
+  }
+
+  nav#navigation .close-menu,
+  nav#navigation .open-menu,
+  nav#navigation .social-links {
+    display: none;
+  }
+
+  nav#navigation .menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+  }
+
+  nav#navigation .menu ul:nth-child(1) {
+    display: flex;
+    gap: 3.2rem;
+  }
+
+  nav#navigation .menu ul li a {
+    color: var(--primary-color);
+    opacity: 0.7;
+  }
+
+  nav#navigation .menu a.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2.4rem;
+
+    border: 0.1rem solid var(--primary-color);
+    border-radius: 4rem;
+
+    color: var(--primary-color);
+
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    text-transform: uppercase;
+  }
+
+  nav#navigation .menu a.button:hover {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+  }
+
+  nav#navigation.scroll .menu ul li a {
+    color: var(--brand-light-2);
+    opacity: 0.6;
+  }
+
+  nav#navigation.scroll .menu a.button {
+    color: white;
+    border-color: white;
+  }
+
+  nav#navigation .menu li a {
+    transition: opacity 0.4s;
+  }
+
+  nav#navigation .menu li a.active,
+  nav#navigation .menu li a:hover {
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  nav#navigation .menu li a::after {
+    content: '';
+    width: 0;
+    height: 0.2rem;
+    background-color: var(--primary-color);
+
+    position: relative;
+    bottom: -2rem;
+    left: -0.5rem;
+
+    display: block;
+
+    transition: width 0.2s;
+  }
+
+  nav#navigation.scroll .menu li a::after {
+    background-color: white;
+  }
+
+  nav#navigation .menu li a.active::after,
+  nav#navigation .menu li a:hover::after {
+    width: 100%;
+    padding-inline: 0.8rem;
+  }
+
+  nav#navigation.scroll .menu li a.active,
+  nav#navigation.scroll .menu li a:hover {
+    opacity: 1;
+  }
+
+  nav#navigation.scroll .menu a.button.active,
+  nav#navigation.scroll .menu a.button:hover {
+    background-color: var(--primary-color);
+    filter: brightness(1.3);
+    border: none;
+  }
+
+  /* ==================  HOME =================== */
+
+  #home::before {
+    /* A gente tira de 86% os 7.2rem do nav */
+    height: calc(96% - var(--nav-height));
+  }
+
+  #home {
+    padding-top: var(--nav-height);
+  }
+
+  #home .wrapper {
+    /* No grid eu posso definir linhas e colunas, como se fosse uma tabela. E trabalhar com os elementos da forma que eu quiser */
+    /* duas colunas, usando unidades de medidas responsiveis/flexivel, que é a fração -> fr  */
+    /* grid-template-columns: 1fr 2fr 1fr; */
+
+    /* 2 colunas -> Parte de cima das colunas:                                AREAS: A, B e C
+                                                A(coluna1 = 60.5rem = primeira parte) B(coluna2 = 1fr = imagem) 
+                                                ===============================================================
+                    Parte de baixo das colunas: C(coluna1 = status)                   C(coluna2 = status) ou seja status ocupa tudo da area C
+    */
+    /* Nesse caso eu estou falando para primeiro coluna 60.5rem e para a segunda 1 fração, ou seja 2 colunas */
+    grid-template-columns: 60.5rem 1fr;
+    /* Com o areas eu escolho a onde eu deixo o elemento */
+    grid-template-areas:
+      'A B'
+      'C C';
+  }
+
+  /* Com isso eu organizo as colunas */
+  #home .col-a {
+    grid-area: A;
+    text-align: left;
+    align-self: center;
+  }
+
+  #home .col-b {
+    grid-area: B;
+  }
+
+  #home h1 {
+    font-size: 5.2rem;
+  }
+
+  #home .content p {
+    font-size: 1.8rem;
+  }
+
+  #home .stats {
+    grid-area: C;
+
+    flex-direction: row;
+
+    padding: 6rem;
+    gap: 0;
+  }
+
+  /* Procura pra mim dentro de stats, que tenha um stat anterior ao stat */
+  #home .stats .stat + .stat {
+    border-left: 0.1rem solid var(--primary-color);
+  }
+
+  /* Dessa forma eu defino o tamanho das caixas, quando coloco flex: 1 eu faço com que cada um dos filhos preencha por igual o espaçamento na caixa que eles estao  */
+  #home .stats .stat {
+    flex: 1;
+  }
+
+  #home .button {
+    margin: 0;
+  }
+
+  #home img {
+    width: 42rem;
+  }
+
+  /* ==================  Services =================== */
+
 }
