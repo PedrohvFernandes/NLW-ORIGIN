@@ -57,7 +57,7 @@ function activateMenuAtCurrentSection(section) {
   // Info dos dados
   console.log('Limite da seção ? ', sectionBoundaries)
 
-  // Ele olha se dentro do elemento .menu a eu tenho um href e se dentro do href tem o nome do id da seçao, por exemplo #home, #about que eu estou passando com o getAttribute(id) que pega o id da seçao que estou passando pra essa função, ou seja em vez de pegar o home inteiro que é um objeto, eu so pego o id da seçao que estou passando pra ca.
+  // Ele olha se dentro do elemento .menu a eu tenho um href e se dentro do href tem o nome do id da seçao, por exemplo #home, #about que eu estou passando com o getAttribute(id) que pega o atributo id da seçao que estou passando pra essa função, ou seja em vez de pegar o home inteiro que é um objeto, eu so pego o id da seçao que estou passando pra ca.
   const sectionId = section.getAttribute('id')
   const menuElement = document
   .querySelector(`.menu a[href*=${sectionId}]`)
