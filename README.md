@@ -15,7 +15,8 @@ Construindo uma aplicação básica de atendimento medico, com as tecnologias ba
 - Demonstração Web e Mobile: https://www.figma.com/proto/5tooMKWvy5O3qA3OAJU3CL/DoctorCare-(Community)?node-id=1716%3A251&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1716%3A251
 
 ## 🌐 Demonstração do app na web: Desktop
-<img width='350' src=''/>
+<img width='700' src='https://github.com/PedrohvFernandes/NLW-ORIGIN/blob/main/assets/img/screenshot/Desktop/Screen1.png'/>
+<img width='700' src='https://github.com/PedrohvFernandes/NLW-ORIGIN/blob/main/assets/img/screenshot/Desktop/Screen1MaisAbaixo.png'/>
 
 ## 🌐 Demonstração do app na web: Mobile
 <img width='350' src='https://github.com/PedrohvFernandes/NLW-ORIGIN/blob/main/assets/img/screenshot/Mobile/Screen2.png'/>
