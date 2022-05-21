@@ -26,6 +26,12 @@ Construindo uma aplicação básica de atendimento medico, com as tecnologias ba
 ## Deploy
 - Deploy Web(na vercel): https://nlw-origin-lovat.vercel.app
 
+## Desafios
+- Criar uma variação desse layout, trocando as informações para um outro negócio.
+  - Ex: Pizzaria.
+- Criar/Alterar alguma seção
+  - Ex: Depoimento (Como visto no NLW#6 origin)
+
 ## ✨ Stack de tecnologias:
 - HTML
 - CSS
