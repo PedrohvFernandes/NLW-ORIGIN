@@ -8,9 +8,9 @@ function onScroll() {
   showBackToTopButtonOnScroll();
 
   activateMenuAtCurrentSection(home);
-  activateMenuAtCurrentSection(services);
-  activateMenuAtCurrentSection(about);
-  activateMenuAtCurrentSection(contact);
+  // activateMenuAtCurrentSection(services);
+  // activateMenuAtCurrentSection(about);
+  // activateMenuAtCurrentSection(contact);
 }
 
 // Ativar o menu na seção do momento
@@ -22,17 +22,17 @@ function activateMenuAtCurrentSection(section) {
 
   // Linha alvo, nunca vai mudar o valor, sempre vai ter esse valor, mas essa função é executado a todo momento que eu faço scroll no onScroll. Ou seja toda vez que eu fizer scroll esse metodo é executado e estou recriando essa targetLine, porque ela não pode ser reatribuida por ser uma const, nunca mais muda seu valor. Estados diferentes, porque ela não pode ser reatribuida. Estado da minha aplicação, momento especifico que alguma coisa esta acontecendo minhas variaveis tudo da minha aplicação tem um determinado valor, mas momento depois sao valores diferentes a onde que eu so mudo o estado desse bloco de codigo, mas a const continua a mesma coisa, porque ela Ñ foi reatribuida 
   const targetLine = scrollY + innerHeight / 2;
-
+  console.log('Linha alvo: ', targetLine);
   // verificar se o topo da seção passou da linha, ou seja tem que estar acima da linha imaginaria e se a parte de baixo da section tem que estar abaixo(final dele) da linha
   // Quais dados vou precisar ? topo da seçao de cada seçao , linha imaginaria da seçao(targetLine), altura de cada seçao
 
   // Pegando o topo da seção
   const sectionTop = section.offsetTop
-  // console.log(sectionTop)
+  console.log('Topo da seção: ', sectionTop)
 
   // Pegando a altura da section para pegar o final da section, que é o topo + o height da seção
   const sectionHeight = section.offsetHeight
-  // console.log(sectionHeight)
+  console.log('Altura da seção: ', sectionHeight)
 
   // seção do topo chegou ou ultrapassou a linha alvo
   const sectionTopReachOrPassedTargetLine = targetLine >= sectionTop
@@ -42,9 +42,9 @@ function activateMenuAtCurrentSection(section) {
   // Verificar se a base está abaixo da linha alvo
   // Quais dados vou precisar ?
 
-  // A seção termina onde? E a onde ela termina é o topo da outra seçao
+  // A seção termina onde? por exemplo no home: sectionTop = 0 + sectionHeight = 834 = 834. E a onde ela termina é o topo da outra seçao, ou seja o service o  sectionTop é 834 + sectionHeight = 1023 = 1857 ...
   const sectionEndsAt = sectionTop + sectionHeight
-  // console.log(sectionEndsAt)
+  console.log('final da seçao que é o topo + altura da seçao: ', sectionEndsAt)
   
   // O final da seção ultrapassou a linha alvo
   const sectionEndPassedTargetLine =  sectionEndsAt <= targetLine
