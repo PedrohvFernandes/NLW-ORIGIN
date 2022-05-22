@@ -8,9 +8,9 @@ function onScroll() {
   showBackToTopButtonOnScroll();
 
   activateMenuAtCurrentSection(home);
-  // activateMenuAtCurrentSection(services);
-  // activateMenuAtCurrentSection(about);
-  // activateMenuAtCurrentSection(contact);
+  activateMenuAtCurrentSection(services);
+  activateMenuAtCurrentSection(about);
+  activateMenuAtCurrentSection(contact);
 }
 
 // Ativar o menu na seção do momento
