@@ -8,7 +8,7 @@
 ### - Qual o objetivo ?
 O projeto da Rocketseat tem como objetivo originar programadores que estão começando na programação agora.
 ### - Tá, mas como que irão fazer isso:
-Construindo uma aplicação básica de atendimento medico, com as tecnologias bases da web: HTML, CSS e JS. Não so isso, teremos também a parte do mobile com media queries.
+Construindo uma aplicação básica de atendimento medico, com as tecnologias bases da web: HTML, CSS e JS. Não so isso, teremos também a parte do responsivo com media queries, a onde a gente faz primeiro para mobile e no ponto de quebra(media queries) faz para desktop.
 
 ## 🔖 Layout, prototipo e demonstração de como sera feito a aplicação
 - Prototipo: https://www.figma.com/file/5tooMKWvy5O3qA3OAJU3CL/DoctorCare-(Community)?node-id=0%3A1
